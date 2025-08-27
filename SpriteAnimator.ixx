@@ -53,7 +53,8 @@ export namespace NARay
 			this->cols = sheet.width / gridSizeX;
 			this->rows = sheet.height / gridSizeY;
 			this->sheet = sheet;
-			origin = { (float)gridSizeX, (float)gridSizeY };
+			this->origin = { 0, 0 };
+			this->pivot = { 0.5f, 0.5f };
 			timer = 0;
 		}
 
@@ -62,12 +63,26 @@ export namespace NARay
 			this->animations[reference] = animation;
 		}
 
-		void SetAnim(int reference)
+		SpriteSheet* SetAnim(int reference)
 		{
 			this->currentAnim = animations[reference];
 			this->timer = 0;
-			this->currentFrame = 0;
-			
+			this->currentFrame = 0;	
+			this->scale = 1;
+			this->rotation = 0;
+			return this;
+		}
+
+		SpriteSheet* SetScale(float scaleFactor)
+		{
+			this->scale = scaleFactor;
+			return this;
+		}
+
+		SpriteSheet* SetRotation(float angle)
+		{
+			this->rotation = angle;
+			return this;
 		}
 
 		void Update(float deltaTime)
@@ -84,19 +99,24 @@ export namespace NARay
 		{		
 			int frame = this->currentAnim.frameData[this->currentFrame];
 			Rectangle source = { this->gridSizeX * (frame % this->cols), this->gridSizeY * (frame / this->cols), this->gridSizeX, this->gridSizeY };
-			Rectangle destination = { x, y, this->gridSizeX, this->gridSizeY };
-			DrawTexturePro(this->sheet, source, destination, origin, 0, WHITE);
+			Rectangle destination = { x, y, this->gridSizeX*this->scale, this->gridSizeY*this->scale };
+			origin.x = (this->gridSizeX * this->pivot.x * this->scale);
+			origin.y = (this->gridSizeY * this->pivot.y * this->scale);
+			DrawTexturePro(this->sheet, source, destination, this->origin, this->rotation, WHITE);
 		}
 
 	private:
 		Texture2D sheet;
 		Vector2 origin;
+		Vector2 pivot;
 		int gridSizeX;
 		int gridSizeY;
 		int rows;
 		int cols;
 		SpriteAnim currentAnim;
 		int currentFrame;
+		float scale;
+		float rotation;
 		float timer;
 		std::map<int, SpriteAnim> animations;
 	};
