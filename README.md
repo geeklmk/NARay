@@ -1,6 +1,11 @@
 # NARay
 Neural Activity Raylib Helper Framework
 
+External Dependencies:
+- Raylib 5.5
+- Tweenie
+
+
 C++ Minimal Framework aiming to smooth down the usual operations for making a small game.
 The aim is to handle:
 - [ ] Sprite animations

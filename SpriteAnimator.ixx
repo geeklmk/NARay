@@ -25,14 +25,20 @@ export module SpriteAnimator;
 
 export namespace NARay
 {
-
+	/// <summary>
+	///  Structure holding simple animation data: animation frames and animation rate in frames per second
+	/// </summary>
 	struct SpriteAnim
 	{
 		SpriteAnim()
 		{
 
 		}
-
+		/// <summary>
+		/// Standard constructur
+		/// </summary>
+		/// <param name="frames">array of frames</param>
+		/// <param name="fps">animation rate in frames per second</param>
 		SpriteAnim(std::span<const int> frames, int fps)
 		{
 			this->frameData = frames;
@@ -45,7 +51,10 @@ export namespace NARay
 		std::span<const int> frameData;
 	};
 
-	struct SpriteSheetData
+	/// <summary>
+	/// Structure holding the single sprite frame data
+	/// </summary>
+	struct SpriteSheetFrameData
 	{
 		Texture2D sheetTexture;
 		Rectangle source;
@@ -53,11 +62,18 @@ export namespace NARay
 		Vector2 spriteSize;
 	};
 
-
+	/// <summary>
+	/// Base class for spritesheets
+	/// </summary>
 	class SpriteSheet
 	{
 	public:
-		virtual SpriteSheetData* GetSpriteData(int frameNumber)
+		/// <summary>
+		/// Returns data for the selected frame
+		/// </summary>
+		/// <param name="frameNumber">frame to get the data from</param>
+		/// <returns></returns>
+		virtual SpriteSheetFrameData* GetSpriteData(int frameNumber)
 		{
 			return NULL;
 		};
@@ -66,6 +82,10 @@ export namespace NARay
 		{
 		};
 
+		/// <summary>
+		/// Returns the number of frames of this specific SpriteSheet
+		/// </summary>
+		/// <returns></returns>
 		int Count()
 		{
 			return frameCount;
@@ -83,13 +103,13 @@ export namespace NARay
 			int cols = sheetTexture.width / gridSizeX;
 			int rows = sheetTexture.height / gridSizeY;
 			frameCount = rows * cols;
-			spriteData = new SpriteSheetData*[cols * rows];
+			spriteData = new SpriteSheetFrameData*[cols * rows];
 			int frame = 0;
 			for (int c = 0; c < cols; c++)
 			{
 				for (int r = 0; r < rows; r++)
 				{
-					spriteData[frame] = new SpriteSheetData();
+					spriteData[frame] = new SpriteSheetFrameData();
 					spriteData[frame]->sheetTexture = sheetTexture;
 					spriteData[frame]->source = { (float)gridSizeX * (frame % cols)+left, (float)gridSizeY * (frame / cols)+top, (float)gridSizeX - left - right, (float)gridSizeY - top - bottom };
 					spriteData[frame]->pivot = { 0.5f, 1.0f };
@@ -99,7 +119,7 @@ export namespace NARay
 			}
 		}
 
-		SpriteSheetData* GetSpriteData(int frameNumber)
+		SpriteSheetFrameData* GetSpriteData(int frameNumber)
 		{
 			return spriteData[frameNumber];
 		}
@@ -113,7 +133,7 @@ export namespace NARay
 			delete[] spriteData;
 		}
 	private:
-		SpriteSheetData** spriteData;
+		SpriteSheetFrameData** spriteData;
 	};
 
 
@@ -167,7 +187,7 @@ export namespace NARay
 		void Draw(int x, int y)
 		{		
 			int frame = this->currentAnim.frameData[this->currentFrame];
-			SpriteSheetData* currentSprite = this->sheet->GetSpriteData(frame);
+			SpriteSheetFrameData* currentSprite = this->sheet->GetSpriteData(frame);
 
 			Rectangle destination = { x, y, currentSprite->spriteSize.x*this->scale, currentSprite->spriteSize.y *this->scale };
 			origin.x = (currentSprite->spriteSize.x * currentSprite->pivot.x * this->scale);
