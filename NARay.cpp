@@ -15,6 +15,7 @@ import SpriteAnimator;
 #include <iostream>
 #include "tweeny/tweeny.h"
 
+using namespace NARay;
 int xPos = 0;
 
 bool stepped(int x)
@@ -42,12 +43,22 @@ int main(void)
     auto tween = tweeny::from(0).to(400).during(3).onStep(stepped);
 
     Texture2D tex = LoadTexture("resources/ninja.png");
+    GridSpriteSheet spriteSheet(tex, 64, 64, 6, 20, 18, 18);
 
-    NARay::SpriteSheet spriteSheet(tex, 64, 64);
+    Sprite sprite_1(&spriteSheet);
+    Sprite sprite_2(&spriteSheet);
+
     int anim1[3] = { 0,1,2 };
-    NARay::SpriteAnim anim(anim1, 4);
-    spriteSheet.RegisterAnimation(0, anim);
-    spriteSheet.SetAnim(0)->SetScale(6);
+    int anim2[4] = { 3, 4, 5, 6 };
+    SpriteAnim anim_a(anim1, 4);
+    SpriteAnim anim_b(anim2, 5);
+
+    sprite_1.RegisterAnimation(0, anim_a);
+    sprite_2.RegisterAnimation(0, anim_b);
+    
+    sprite_1.SetAnim(0).SetScale(4);
+    
+    sprite_2.SetAnim(0).SetScale(2);
 
     float timer = 0;
     int frame = 0;
@@ -57,14 +68,22 @@ int main(void)
     {
         float delta = GetFrameTime();
         tween.step(delta / 3.0f);
-        spriteSheet.Update(delta);
-        spriteSheet.SetRotation(ang);
+        
+        sprite_1.Update(delta);
+        sprite_2.Update(delta);
+
+
+        //sprite.SetRotation(ang);
         ang += 1;
 
 
         BeginDrawing();
-        spriteSheet.Draw(100, 100);
+        
+        sprite_1.Draw(200, 400);
+        sprite_2.Draw(400, 400);
+
         ClearBackground(RAYWHITE);
+        DrawLine(0, 400, 600, 400, BLACK);
 
         DrawText("ciao", xPos, 200, 20, LIGHTGRAY);
 
@@ -72,6 +91,7 @@ int main(void)
         //----------------------------------------------------------------------------------
     }
 
+    spriteSheet.Destroy();
     // De-Initialization
     //--------------------------------------------------------------------------------------
     CloseWindow();        // Close window and OpenGL context

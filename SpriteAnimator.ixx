@@ -4,7 +4,9 @@
  * Author:     Luca 'aXon' Marchetti
  *
  * Description:
- *   Sprite animations utilities
+ *   Sprite animations utilities.
+ *   Uses NARay DrawTexturePro to draw the sprite, handling fixed-time frame animation
+ *   and position/rotation/ with pivot point
  *
  * License: LGPL 2.1
  *
@@ -43,18 +45,85 @@ export namespace NARay
 		std::span<const int> frameData;
 	};
 
-	class SpriteSheet 
+	struct SpriteSheetData
+	{
+		Texture2D sheetTexture;
+		Rectangle source;
+		Vector2 pivot;
+		Vector2 spriteSize;
+	};
+
+
+	class SpriteSheet
 	{
 	public:
-		SpriteSheet(Texture2D &sheet, int gridSizeX, int gridSizeY)
+		virtual SpriteSheetData* GetSpriteData(int frameNumber)
+		{
+			return NULL;
+		};
+
+		virtual void Destroy()
+		{
+		};
+
+		int Count()
+		{
+			return frameCount;
+		}
+
+	protected:
+		int frameCount;
+	};
+
+	class GridSpriteSheet : public SpriteSheet
+	{
+	public:
+		GridSpriteSheet(Texture2D sheetTexture, int gridSizeX, int gridSizeY, int top=0, int bottom=0, int left=0, int right=0)
+		{
+			int cols = sheetTexture.width / gridSizeX;
+			int rows = sheetTexture.height / gridSizeY;
+			frameCount = rows * cols;
+			spriteData = new SpriteSheetData*[cols * rows];
+			int frame = 0;
+			for (int c = 0; c < cols; c++)
+			{
+				for (int r = 0; r < rows; r++)
+				{
+					spriteData[frame] = new SpriteSheetData();
+					spriteData[frame]->sheetTexture = sheetTexture;
+					spriteData[frame]->source = { (float)gridSizeX * (frame % cols)+left, (float)gridSizeY * (frame / cols)+top, (float)gridSizeX - left - right, (float)gridSizeY - top - bottom };
+					spriteData[frame]->pivot = { 0.5f, 1.0f };
+					spriteData[frame]->spriteSize = { (float)gridSizeX - left - right, (float)gridSizeY - top - bottom };
+					frame++;
+				}
+			}
+		}
+
+		SpriteSheetData* GetSpriteData(int frameNumber)
+		{
+			return spriteData[frameNumber];
+		}
+
+		void Destroy()
+		{
+			for (int frame = 0; frame < frameCount; frame++)
+			{
+				delete spriteData[frame];
+			}
+			delete[] spriteData;
+		}
+	private:
+		SpriteSheetData** spriteData;
+	};
+
+
+	class Sprite 
+	{
+	public:
+		Sprite(SpriteSheet* spriteSheet)
 		{ 
-			this->gridSizeX = gridSizeX;
-			this->gridSizeY = gridSizeY;
-			this->cols = sheet.width / gridSizeX;
-			this->rows = sheet.height / gridSizeY;
-			this->sheet = sheet;
+			this->sheet = spriteSheet;
 			this->origin = { 0, 0 };
-			this->pivot = { 0.5f, 0.5f };
 			timer = 0;
 		}
 
@@ -63,26 +132,26 @@ export namespace NARay
 			this->animations[reference] = animation;
 		}
 
-		SpriteSheet* SetAnim(int reference)
+		Sprite& SetAnim(int reference)
 		{
 			this->currentAnim = animations[reference];
 			this->timer = 0;
 			this->currentFrame = 0;	
 			this->scale = 1;
 			this->rotation = 0;
-			return this;
+			return *this;
 		}
 
-		SpriteSheet* SetScale(float scaleFactor)
+		Sprite& SetScale(float scaleFactor)
 		{
 			this->scale = scaleFactor;
-			return this;
+			return *this;
 		}
 
-		SpriteSheet* SetRotation(float angle)
+		Sprite& SetRotation(float angle)
 		{
 			this->rotation = angle;
-			return this;
+			return *this;
 		}
 
 		void Update(float deltaTime)
@@ -98,21 +167,17 @@ export namespace NARay
 		void Draw(int x, int y)
 		{		
 			int frame = this->currentAnim.frameData[this->currentFrame];
-			Rectangle source = { this->gridSizeX * (frame % this->cols), this->gridSizeY * (frame / this->cols), this->gridSizeX, this->gridSizeY };
-			Rectangle destination = { x, y, this->gridSizeX*this->scale, this->gridSizeY*this->scale };
-			origin.x = (this->gridSizeX * this->pivot.x * this->scale);
-			origin.y = (this->gridSizeY * this->pivot.y * this->scale);
-			DrawTexturePro(this->sheet, source, destination, this->origin, this->rotation, WHITE);
+			SpriteSheetData* currentSprite = this->sheet->GetSpriteData(frame);
+
+			Rectangle destination = { x, y, currentSprite->spriteSize.x*this->scale, currentSprite->spriteSize.y *this->scale };
+			origin.x = (currentSprite->spriteSize.x * currentSprite->pivot.x * this->scale);
+			origin.y = (currentSprite->spriteSize.y * currentSprite->pivot.y * this->scale);
+			DrawTexturePro( currentSprite->sheetTexture, currentSprite->source, destination, this->origin, this->rotation, WHITE);
 		}
 
 	private:
-		Texture2D sheet;
+		SpriteSheet* sheet;
 		Vector2 origin;
-		Vector2 pivot;
-		int gridSizeX;
-		int gridSizeY;
-		int rows;
-		int cols;
 		SpriteAnim currentAnim;
 		int currentFrame;
 		float scale;
