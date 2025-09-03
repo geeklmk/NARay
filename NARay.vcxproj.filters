@@ -21,6 +21,15 @@
     <ClCompile Include="SpriteAnimator.ixx">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="SpriteAnimator.GridSpriteSheet.ixx">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="SpriteAnimator.Sprite.ixx">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="SpriteAnimator.SpriteSheet.ixx">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <Image Include="resources\ninja.png">
