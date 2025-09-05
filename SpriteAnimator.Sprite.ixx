@@ -66,7 +66,6 @@ namespace NARay
 			this->sheet = spriteSheet;
 			this->origin = { 0, 0 };
 			timer = 0;
-			SpriteManager::RegisterSprite(this);
 		}
 
 		void RegisterAnimation(int reference, SpriteAnim& animation)
@@ -138,34 +137,5 @@ namespace NARay
 		float rotation;
 		float timer;
 		std::map<int, SpriteAnim> animations;
-	};
-
-	export class SpriteManager
-	{
-	public:
-		inline static float frameDeltaTime = 0.0f;
-
-		static void DrawSprites(float frameDeltaTime)
-		{
-			SpriteManager::frameDeltaTime = frameDeltaTime;
-			for (Sprite* sprite : SpriteManager::sprites)
-			{
-				sprite->UpdateTimers( SpriteManager::frameDeltaTime );
-				sprite->Draw();
-			}
-		}
-
-		static void RegisterSprite(Sprite& spriteToRegister)
-		{
-			SpriteManager::sprites.push_back(&spriteToRegister);
-		}
-
-		static void UnRegisterSprite(Sprite& spriteToRegister)
-		{
-			std::erase(SpriteManager::sprites, &spriteToRegister);
-		}
-
-	private:
-		inline static std::vector<Sprite*> sprites;
 	};
 }

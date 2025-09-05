@@ -131,6 +131,7 @@
     <ClCompile Include="SpriteAnimator.GridSpriteSheet.ixx" />
     <ClCompile Include="SpriteAnimator.ixx" />
     <ClCompile Include="SpriteAnimator.Sprite.ixx" />
+    <ClCompile Include="SpriteAnimator.SpriteManager.ixx" />
     <ClCompile Include="SpriteAnimator.SpriteSheet.ixx" />
   </ItemGroup>
   <ItemGroup>

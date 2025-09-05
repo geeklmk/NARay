@@ -30,6 +30,9 @@
     <ClCompile Include="SpriteAnimator.SpriteSheet.ixx">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="SpriteAnimator.SpriteManager.ixx">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <Image Include="resources\ninja.png">

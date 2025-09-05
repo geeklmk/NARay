@@ -26,3 +26,4 @@ export module SpriteAnimator;
 export import :SpriteSheet;
 export import :GridSpriteSheet;
 export import :Sprite;
+export import :SpriteManager;
