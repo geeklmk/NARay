@@ -19,6 +19,7 @@ extern "C" {
 #include <vector>
 #include <array>
 #include <map>
+#include <vector>
 
 export module SpriteAnimator:Sprite;
 
@@ -65,6 +66,7 @@ namespace NARay
 			this->sheet = spriteSheet;
 			this->origin = { 0, 0 };
 			timer = 0;
+			SpriteManager::RegisterSprite(this);
 		}
 
 		void RegisterAnimation(int reference, SpriteAnim& animation)
@@ -94,9 +96,14 @@ namespace NARay
 			return *this;
 		}
 
-		void Update(float deltaTime)
+		void SetPosition(int x, int y)
 		{
-			this->timer += deltaTime;
+			this->position = { (float)x, (float)y };
+		}
+		
+		void UpdateTimers(float delta)
+		{
+			this->timer += delta;
 			if (this->timer >= this->currentAnim.animSpeed)
 			{
 				this->timer -= this->currentAnim.animSpeed;
@@ -104,25 +111,61 @@ namespace NARay
 			}
 		}
 
-		void Draw(int x, int y)
+		void Draw()
 		{
 			int frame = this->currentAnim.frameData[this->currentFrame];
-			SpriteSheetFrameData* currentSprite = this->sheet->GetSpriteData(frame);
+			SpriteSheetFrameData* currentSprite = this->sheet->GetFrameData(frame);
 
-			Rectangle destination = { x, y, currentSprite->spriteSize.x * this->scale, currentSprite->spriteSize.y * this->scale };
 			origin.x = (currentSprite->spriteSize.x * currentSprite->pivot.x * this->scale);
 			origin.y = (currentSprite->spriteSize.y * currentSprite->pivot.y * this->scale);
+			Vector2 displacement = {
+				this->origin.x - (currentSprite->spriteSize.x * currentSprite->handle.x * this->scale),
+				this->origin.y - (currentSprite->spriteSize.y * currentSprite->handle.y * this->scale)
+			};
+
+			Rectangle destination = { position.x +displacement.x, position.y+displacement.y, currentSprite->spriteSize.x * this->scale, currentSprite->spriteSize.y * this->scale};
+
 			DrawTexturePro(currentSprite->sheetTexture, currentSprite->source, destination, this->origin, this->rotation, WHITE);
 		}
 
 	private:
 		SpriteSheet* sheet;
 		Vector2 origin;
+		Vector2 position;
 		SpriteAnim currentAnim;
 		int currentFrame;
 		float scale;
 		float rotation;
 		float timer;
 		std::map<int, SpriteAnim> animations;
+	};
+
+	export class SpriteManager
+	{
+	public:
+		inline static float frameDeltaTime = 0.0f;
+
+		static void DrawSprites(float frameDeltaTime)
+		{
+			SpriteManager::frameDeltaTime = frameDeltaTime;
+			for (Sprite* sprite : SpriteManager::sprites)
+			{
+				sprite->UpdateTimers( SpriteManager::frameDeltaTime );
+				sprite->Draw();
+			}
+		}
+
+		static void RegisterSprite(Sprite& spriteToRegister)
+		{
+			SpriteManager::sprites.push_back(&spriteToRegister);
+		}
+
+		static void UnRegisterSprite(Sprite& spriteToRegister)
+		{
+			std::erase(SpriteManager::sprites, &spriteToRegister);
+		}
+
+	private:
+		inline static std::vector<Sprite*> sprites;
 	};
 }

@@ -11,6 +11,7 @@
  */
 
 import SpriteAnimator;
+
 #include "raylib.h"
 #include <iostream>
 #include "tweeny/tweeny.h"
@@ -43,12 +44,16 @@ int main(void)
     auto tween = tweeny::from(0).to(400).during(3).onStep(stepped);
 
     Texture2D tex = LoadTexture("resources/ninja.png");
-    GridSpriteSheet spriteSheet(tex, 64, 64, 6, 20, 18, 18);
+    GridSpriteSheet spriteSheet;
+    spriteSheet
+        .ProcessSpriteSheet(tex, 64, 64, 6, 20, 18, 18)
+        .SetHandle({ 0.5f, 1.0f })
+        .SetPivot({ 0.5f, 0.5f });
 
     Sprite sprite_1(&spriteSheet);
     Sprite sprite_2(&spriteSheet);
 
-    int anim1[3] = { 0,1,2 };
+    int anim1[3] = { 0, 1, 2 };
     int anim2[4] = { 3, 4, 5, 6 };
     SpriteAnim anim_a(anim1, 4);
     SpriteAnim anim_b(anim2, 5);
@@ -68,21 +73,18 @@ int main(void)
     {
         float delta = GetFrameTime();
         tween.step(delta / 3.0f);
-        
-        sprite_1.Update(delta);
-        sprite_2.Update(delta);
 
-
-        //sprite.SetRotation(ang);
+        sprite_1.SetRotation(ang);
         ang += 1;
+        sprite_1.SetPosition(200, 400);
+        sprite_2.SetPosition(400, 400);
 
 
         BeginDrawing();
-        
-        sprite_1.Draw(200, 400);
-        sprite_2.Draw(400, 400);
-
+  
         ClearBackground(RAYWHITE);
+        SpriteManager::DrawSprites(delta);
+
         DrawLine(0, 400, 600, 400, BLACK);
 
         DrawText("ciao", xPos, 200, 20, LIGHTGRAY);

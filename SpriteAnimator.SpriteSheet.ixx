@@ -32,7 +32,14 @@ namespace NARay
 	{
 		Texture2D sheetTexture;
 		Rectangle source;
+		/// <summary>
+		/// pivot point for rotations
+		/// </summary>
 		Vector2 pivot;
+		/// <summary>
+		/// handle point coordinates are relative to
+		/// </summary>
+		Vector2 handle;
 		Vector2 spriteSize;
 	};
 
@@ -47,7 +54,7 @@ namespace NARay
 		/// </summary>
 		/// <param name="frameNumber">frame to get the data from</param>
 		/// <returns></returns>
-		virtual SpriteSheetFrameData* GetSpriteData(int frameNumber)
+		virtual SpriteSheetFrameData* GetFrameData(int frameNumber)
 		{
 			return NULL;
 		};

@@ -29,7 +29,32 @@ namespace NARay
 	export class GridSpriteSheet : public SpriteSheet
 	{
 	public:
-		GridSpriteSheet(Texture2D sheetTexture, int gridSizeX, int gridSizeY, int top = 0, int bottom = 0, int left = 0, int right = 0)
+		GridSpriteSheet()
+		{
+
+		}
+
+		GridSpriteSheet& SetPivot(Vector2 pivot)
+		{
+			this->defaultPivot = pivot;
+
+			for (int i=0; i < this->frameCount; i++)
+				spriteData[i]->pivot = pivot;
+			
+			return *this;
+		}
+		
+		GridSpriteSheet& SetHandle(Vector2 handle)
+		{
+			this->defaultHandle = handle;
+
+			for (int i=0; i < this->frameCount; i++)
+				spriteData[i]->handle = handle;
+
+			return *this;
+		}
+
+		GridSpriteSheet& ProcessSpriteSheet(Texture2D sheetTexture, int gridSizeX, int gridSizeY, int top = 0, int bottom = 0, int left = 0, int right = 0)
 		{
 			int cols = sheetTexture.width / gridSizeX;
 			int rows = sheetTexture.height / gridSizeY;
@@ -43,14 +68,17 @@ namespace NARay
 					spriteData[frame] = new SpriteSheetFrameData();
 					spriteData[frame]->sheetTexture = sheetTexture;
 					spriteData[frame]->source = { (float)gridSizeX * (frame % cols) + left, (float)gridSizeY * (frame / cols) + top, (float)gridSizeX - left - right, (float)gridSizeY - top - bottom };
-					spriteData[frame]->pivot = { 0.5f, 1.0f };
+					spriteData[frame]->pivot = defaultPivot;
+					spriteData[frame]->handle = defaultHandle;
 					spriteData[frame]->spriteSize = { (float)gridSizeX - left - right, (float)gridSizeY - top - bottom };
 					frame++;
 				}
 			}
+
+			return *this;
 		}
 
-		SpriteSheetFrameData* GetSpriteData(int frameNumber)
+		SpriteSheetFrameData* GetFrameData(int frameNumber)
 		{
 			return spriteData[frameNumber];
 		}
@@ -65,5 +93,7 @@ namespace NARay
 		}
 	private:
 		SpriteSheetFrameData** spriteData;
+		Vector2 defaultPivot = { 0.5f, 0.5f };
+		Vector2 defaultHandle = { 0.0f,0.0f };
 	};
 }
