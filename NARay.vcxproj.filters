@@ -13,25 +13,34 @@
       <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
       <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
     </Filter>
+    <Filter Include="Source Files\Libs">
+      <UniqueIdentifier>{07156e3c-d442-471a-ac2d-fedc1230f842}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Libs\NARay">
+      <UniqueIdentifier>{5800720a-3558-4590-a53d-5dd90efa8fc8}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Libs\NARay\SpriteAnimator">
+      <UniqueIdentifier>{24c96496-5f2b-4bae-b2a0-fc1cbc4e1245}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="NARay.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="SpriteAnimator.ixx">
-      <Filter>Source Files</Filter>
+    <ClCompile Include="libs\NARay\SpriteAnimator\SpriteAnimator.GridSpriteSheet.ixx">
+      <Filter>Source Files\Libs\NARay\SpriteAnimator</Filter>
     </ClCompile>
-    <ClCompile Include="SpriteAnimator.GridSpriteSheet.ixx">
-      <Filter>Source Files</Filter>
+    <ClCompile Include="libs\NARay\SpriteAnimator\SpriteAnimator.ixx">
+      <Filter>Source Files\Libs\NARay\SpriteAnimator</Filter>
     </ClCompile>
-    <ClCompile Include="SpriteAnimator.Sprite.ixx">
-      <Filter>Source Files</Filter>
+    <ClCompile Include="libs\NARay\SpriteAnimator\SpriteAnimator.Sprite.ixx">
+      <Filter>Source Files\Libs\NARay\SpriteAnimator</Filter>
     </ClCompile>
-    <ClCompile Include="SpriteAnimator.SpriteSheet.ixx">
-      <Filter>Source Files</Filter>
+    <ClCompile Include="libs\NARay\SpriteAnimator\SpriteAnimator.SpriteManager.ixx">
+      <Filter>Source Files\Libs\NARay\SpriteAnimator</Filter>
     </ClCompile>
-    <ClCompile Include="SpriteAnimator.SpriteManager.ixx">
-      <Filter>Source Files</Filter>
+    <ClCompile Include="libs\NARay\SpriteAnimator\SpriteAnimator.SpriteSheet.ixx">
+      <Filter>Source Files\Libs\NARay\SpriteAnimator</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

@@ -89,14 +89,13 @@ int main(void)
         DrawText("ciao", xPos, 200, 20, LIGHTGRAY);
 
         EndDrawing();
-        //----------------------------------------------------------------------------------
     }
 
+    // Teardown
+    SpriteManager::UnregisterAll();
     spriteSheet.Destroy();
-    // De-Initialization
-    //--------------------------------------------------------------------------------------
-    CloseWindow();        // Close window and OpenGL context
-    //--------------------------------------------------------------------------------------
+    UnloadTexture(tex);
+    CloseWindow();
 
     return 0;
 }

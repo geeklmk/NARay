@@ -16,10 +16,8 @@ extern "C" {
 }
 
 #include <span>
-#include <vector>
-#include <array>
-#include <map>
-#include <vector>
+#include <unordered_map>
+
 
 export module SpriteAnimator:Sprite;
 
@@ -136,6 +134,6 @@ namespace NARay
 		float scale;
 		float rotation;
 		float timer;
-		std::map<int, SpriteAnim> animations;
+		std::unordered_map<int, SpriteAnim> animations;
 	};
 }

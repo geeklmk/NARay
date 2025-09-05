@@ -11,14 +11,6 @@
  * License: LGPL 2.1
  *
  */
-extern "C" {
-#include "raylib.h"
-}
-
-#include <span>
-#include <vector>
-#include <array>
-#include <map>
 #include <vector>
 
 export module SpriteAnimator:SpriteManager;
@@ -47,9 +39,10 @@ namespace NARay
 			SpriteManager::sprites.push_back(spriteToRegister);
 		}
 
-		static void UnRegisterSprite(Sprite* spriteToRegister)
+		static void UnRegisterSprite(Sprite* spriteToUnRegister)
 		{
-			std::erase(SpriteManager::sprites, spriteToRegister);
+			std::erase(SpriteManager::sprites, spriteToUnRegister);
+			delete spriteToUnRegister;
 		}
 
 		static Sprite* CreateSprite(SpriteSheet* spriteSheet)
@@ -57,6 +50,13 @@ namespace NARay
 			Sprite* newSprite = new Sprite(spriteSheet);
 			SpriteManager::RegisterSprite(newSprite);
 			return newSprite;
+		}
+
+		static void UnregisterAll()
+		{
+			for (Sprite* sprite : SpriteManager::sprites)
+				delete sprite;
+			sprites.clear();
 		}
 
 	private:

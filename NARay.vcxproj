@@ -127,12 +127,12 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="libs\NARay\SpriteAnimator\SpriteAnimator.GridSpriteSheet.ixx" />
+    <ClCompile Include="libs\NARay\SpriteAnimator\SpriteAnimator.ixx" />
+    <ClCompile Include="libs\NARay\SpriteAnimator\SpriteAnimator.Sprite.ixx" />
+    <ClCompile Include="libs\NARay\SpriteAnimator\SpriteAnimator.SpriteManager.ixx" />
+    <ClCompile Include="libs\NARay\SpriteAnimator\SpriteAnimator.SpriteSheet.ixx" />
     <ClCompile Include="NARay.cpp" />
-    <ClCompile Include="SpriteAnimator.GridSpriteSheet.ixx" />
-    <ClCompile Include="SpriteAnimator.ixx" />
-    <ClCompile Include="SpriteAnimator.Sprite.ixx" />
-    <ClCompile Include="SpriteAnimator.SpriteManager.ixx" />
-    <ClCompile Include="SpriteAnimator.SpriteSheet.ixx" />
   </ItemGroup>
   <ItemGroup>
     <Image Include="resources\ninja.png" />

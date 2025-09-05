@@ -11,15 +11,6 @@
  * License: LGPL 2.1
  *
  */
-extern "C" {
-#include "raylib.h"
-}
-
-#include <span>
-#include <vector>
-#include <array>
-#include <map>
-
 
 export module SpriteAnimator;
 
