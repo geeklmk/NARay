@@ -11,6 +11,7 @@
  */
 
 import SpriteAnimator;
+import SGui;
 
 #include "raylib.h"
 #include <iostream>
@@ -42,6 +43,12 @@ int main(void)
     // Main game loop
 
     auto tween = tweeny::from(0).to(400).during(3).onStep(stepped);
+
+    Texture2D panel = LoadTexture("resources/nineslice.png");
+    NineSlice slice(panel, 32, 32, 32, 32);
+    NSPanel uiPanel(slice);
+    uiPanel.SetPosition(100, 100);
+    uiPanel.SetSize(400, 100);
 
     Texture2D tex = LoadTexture("resources/ninja.png");
     GridSpriteSheet spriteSheet;
@@ -82,6 +89,9 @@ int main(void)
         BeginDrawing();
   
         ClearBackground(RAYWHITE);
+
+        uiPanel.Draw();
+
         SpriteManager::DrawSprites(delta);
 
         DrawLine(0, 400, 600, 400, BLACK);
@@ -95,6 +105,7 @@ int main(void)
     SpriteManager::UnregisterAll();
     spriteSheet.Destroy();
     UnloadTexture(tex);
+    UnloadTexture(panel);
     CloseWindow();
 
     return 0;

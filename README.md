@@ -8,9 +8,10 @@ External Dependencies:
 
 C++ Minimal Framework aiming to smooth down the usual operations for making a small game.
 The aim is to handle:
-- [ ] Sprite animations
+- [x] Sprite animations
 - [ ] Sprite effects (rotation, wobble)
 - [ ] Integration with Box2D
 - [ ] Minimal Game UI (skinnable buttons, checkboxes, multiple selection)
 - [ ] Really simple Text panel system, suitable for in-game dialogues
 - [ ] Simple tilemaps
+- [x] Very Simple State Machine system

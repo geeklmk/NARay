@@ -22,6 +22,12 @@
     <Filter Include="Source Files\Libs\NARay\SpriteAnimator">
       <UniqueIdentifier>{24c96496-5f2b-4bae-b2a0-fc1cbc4e1245}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Source Files\Libs\NARay\StateMachine">
+      <UniqueIdentifier>{b6e4daf8-5974-42fd-a648-a28bbb4dd2a9}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Libs\NARay\SGui">
+      <UniqueIdentifier>{dcd39b04-865a-429d-840e-b3df79295304}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="NARay.cpp">
@@ -42,9 +48,18 @@
     <ClCompile Include="libs\NARay\SpriteAnimator\SpriteAnimator.SpriteSheet.ixx">
       <Filter>Source Files\Libs\NARay\SpriteAnimator</Filter>
     </ClCompile>
+    <ClCompile Include="libs\NARay\StateMachine\StateMachine.ixx">
+      <Filter>Source Files\Libs\NARay\StateMachine</Filter>
+    </ClCompile>
+    <ClCompile Include="libs\NARay\SGui\SGui.ixx">
+      <Filter>Source Files\Libs\NARay\SGui</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <Image Include="resources\ninja.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="resources\nineslice.png">
       <Filter>Resource Files</Filter>
     </Image>
   </ItemGroup>

@@ -127,14 +127,17 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="libs\NARay\SGui\SGui.ixx" />
     <ClCompile Include="libs\NARay\SpriteAnimator\SpriteAnimator.GridSpriteSheet.ixx" />
     <ClCompile Include="libs\NARay\SpriteAnimator\SpriteAnimator.ixx" />
     <ClCompile Include="libs\NARay\SpriteAnimator\SpriteAnimator.Sprite.ixx" />
     <ClCompile Include="libs\NARay\SpriteAnimator\SpriteAnimator.SpriteManager.ixx" />
     <ClCompile Include="libs\NARay\SpriteAnimator\SpriteAnimator.SpriteSheet.ixx" />
+    <ClCompile Include="libs\NARay\StateMachine\StateMachine.ixx" />
     <ClCompile Include="NARay.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <Image Include="resources\nineslice.png" />
     <Image Include="resources\ninja.png" />
   </ItemGroup>
   <ItemGroup>
