@@ -57,7 +57,7 @@ namespace NARay
 
 		NSPanel& Draw()
 		{ 
-			Rectangle dest = { position.x, position.y, position.x + size.x, position.y + size.y };
+			Rectangle dest = { position.x, position.y,  size.x,  size.y };
 			float texW = nineSlice->texture.width;
 			float texH = nineSlice->texture.height;
 

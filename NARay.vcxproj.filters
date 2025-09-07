@@ -28,6 +28,9 @@
     <Filter Include="Source Files\Libs\NARay\SGui">
       <UniqueIdentifier>{dcd39b04-865a-429d-840e-b3df79295304}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Resource Files\forest">
+      <UniqueIdentifier>{17b94908-9179-4fb8-bedd-bfc9ed4a75a6}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="NARay.cpp">
@@ -61,6 +64,42 @@
     </Image>
     <Image Include="resources\nineslice.png">
       <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="resources\forest\Layer_0000_9.png">
+      <Filter>Resource Files\forest</Filter>
+    </Image>
+    <Image Include="resources\forest\Layer_0001_8.png">
+      <Filter>Resource Files\forest</Filter>
+    </Image>
+    <Image Include="resources\forest\Layer_0002_7.png">
+      <Filter>Resource Files\forest</Filter>
+    </Image>
+    <Image Include="resources\forest\Layer_0003_6.png">
+      <Filter>Resource Files\forest</Filter>
+    </Image>
+    <Image Include="resources\forest\Layer_0004_Lights.png">
+      <Filter>Resource Files\forest</Filter>
+    </Image>
+    <Image Include="resources\forest\Layer_0005_5.png">
+      <Filter>Resource Files\forest</Filter>
+    </Image>
+    <Image Include="resources\forest\Layer_0006_4.png">
+      <Filter>Resource Files\forest</Filter>
+    </Image>
+    <Image Include="resources\forest\Layer_0007_Lights.png">
+      <Filter>Resource Files\forest</Filter>
+    </Image>
+    <Image Include="resources\forest\Layer_0008_3.png">
+      <Filter>Resource Files\forest</Filter>
+    </Image>
+    <Image Include="resources\forest\Layer_0009_2.png">
+      <Filter>Resource Files\forest</Filter>
+    </Image>
+    <Image Include="resources\forest\Layer_0010_1.png">
+      <Filter>Resource Files\forest</Filter>
+    </Image>
+    <Image Include="resources\forest\Layer_0011_0.png">
+      <Filter>Resource Files\forest</Filter>
     </Image>
   </ItemGroup>
   <ItemGroup>
