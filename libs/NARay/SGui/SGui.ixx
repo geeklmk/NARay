@@ -12,6 +12,7 @@
 extern "C" {
 #include "raylib.h"
 }
+import GfxPipeline;
 export module SGui;
 
 namespace NARay
@@ -34,13 +35,14 @@ namespace NARay
 	};
 
 
-	export class NSPanel
+	export class NSPanel : public PipelineDrawable
 	{
 	public:
 
 		NSPanel(NineSlice& nineSlice)
 		{
 			this->nineSlice = &nineSlice;
+			SetOrder(500);
 		}
 
 		NSPanel& SetPosition(int x, int y)
@@ -55,7 +57,7 @@ namespace NARay
 			return *this;
 		}
 
-		NSPanel& Draw()
+		void Draw()
 		{ 
 			Rectangle dest = { position.x, position.y,  size.x,  size.y };
 			float texW = nineSlice->texture.width;
@@ -98,7 +100,6 @@ namespace NARay
 					DrawTexturePro(nineSlice->texture, source[i], dests[i], { 0, 0 }, 0.0f, WHITE);
 				}
 			}
-			return *this;
 		}
 	private:
 

@@ -51,25 +51,27 @@ int main(void)
         .SetHandle({ 0.5f, 1.0f })
         .SetPivot({ 0.5f, 0.5f });
 
-    Sprite* sprite_1 = SpriteManager::CreateSprite(&spriteSheet);
-    Sprite* sprite_2 = SpriteManager::CreateSprite(&spriteSheet);
+    Sprite sprite_1(&spriteSheet);
+    Sprite sprite_2(&spriteSheet);
 
     int anim1[3] = { 0, 1, 2 };
     int anim2[4] = { 3, 4, 5, 6 };
     SpriteAnim anim_a(anim1, 4);
     SpriteAnim anim_b(anim2, 5);
 
-    sprite_1->RegisterAnimation(0, anim_a);
-    sprite_2->RegisterAnimation(0, anim_b);
+    sprite_1.RegisterAnimation(0, anim_a);
+    sprite_2.RegisterAnimation(0, anim_b);
     
-    sprite_1->SetAnim(0).SetScale(4);
+    sprite_1.SetAnim(0).SetScale(4);
     
-    sprite_2->SetAnim(0).SetScale(2);
+    sprite_2.SetAnim(0).SetScale(3);
+    sprite_1.SetOrder(3);
+    sprite_2.SetOrder(2);
 
     Texture2D panel = LoadTexture("resources/nineslice.png");
     NineSlice slice(panel, 48, 48, 48, 48);
     NSPanel uiPanel(slice);
-    uiPanel.SetPosition(16, 16);
+    uiPanel.SetPosition(16, 400);
     uiPanel.SetSize(screenWidth - 32, 164);
 
 
@@ -108,25 +110,20 @@ int main(void)
 
         //sprite_1->SetRotation(ang);
         //ang += 1;
-        sprite_1->SetPosition(200, 729-jump);
-        sprite_2->SetPosition(400, 729);
+        sprite_1.SetPosition(200, 729-jump);
+        sprite_2.SetPosition(250, 729);
 
         BeginDrawing();
   
         ClearBackground(RAYWHITE);
 
-        uiPanel.Draw();
-
-        SpriteManager::DrawSprites(delta);
+        GfxPipeline::Draw(delta);
 
         DrawLine(0, 400, 600, 400, BLACK);
-
 
         EndDrawing();
     }
 
-    // Teardown
-    SpriteManager::UnregisterAll();
     spriteSheet.Destroy();
 
     UnloadTexture(tex);

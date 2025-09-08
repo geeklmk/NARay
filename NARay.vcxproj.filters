@@ -31,6 +31,9 @@
     <Filter Include="Resource Files\forest">
       <UniqueIdentifier>{17b94908-9179-4fb8-bedd-bfc9ed4a75a6}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Source Files\Libs\NARay\GfxPipeline">
+      <UniqueIdentifier>{6f37a335-374c-427d-b5d5-a886327a5c21}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="NARay.cpp">
@@ -56,6 +59,9 @@
     </ClCompile>
     <ClCompile Include="libs\NARay\SGui\SGui.ixx">
       <Filter>Source Files\Libs\NARay\SGui</Filter>
+    </ClCompile>
+    <ClCompile Include="libs\NARay\GfxPipeline\GfxPipeline.ixx">
+      <Filter>Source Files\Libs\NARay\GfxPipeline</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

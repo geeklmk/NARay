@@ -127,6 +127,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="libs\NARay\GfxPipeline\GfxPipeline.ixx" />
     <ClCompile Include="libs\NARay\SGui\SGui.ixx" />
     <ClCompile Include="libs\NARay\SpriteAnimator\SpriteAnimator.GridSpriteSheet.ixx" />
     <ClCompile Include="libs\NARay\SpriteAnimator\SpriteAnimator.ixx" />

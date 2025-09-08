@@ -23,6 +23,7 @@ export module SpriteAnimator:Sprite;
 
 import :SpriteSheet;
 import :GridSpriteSheet;
+import GfxPipeline;
 
 namespace NARay
 {
@@ -56,7 +57,7 @@ namespace NARay
 	/// <summary>
 	/// Basic sprite handling class
 	/// </summary>
-	export class Sprite
+	export class Sprite : public PipelineDrawable
 	{
 	public:
 		Sprite(SpriteSheet* spriteSheet)
@@ -93,9 +94,10 @@ namespace NARay
 			return *this;
 		}
 
-		void SetPosition(int x, int y)
+		Sprite& SetPosition(int x, int y)
 		{
 			this->position = { (float)x, (float)y };
+			return *this;
 		}
 		
 		void UpdateTimers(float delta)

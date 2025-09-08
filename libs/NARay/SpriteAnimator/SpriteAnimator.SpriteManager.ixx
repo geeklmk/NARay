@@ -17,49 +17,49 @@ export module SpriteAnimator:SpriteManager;
 
 import :Sprite;
 
-namespace NARay
-{
-	export class SpriteManager
-	{
-	public:
-		inline static float frameDeltaTime = 0.0f;
-
-		static void DrawSprites(float frameDeltaTime)
-		{
-			SpriteManager::frameDeltaTime = frameDeltaTime;
-			for (Sprite* sprite : SpriteManager::sprites)
-			{
-				sprite->UpdateTimers(SpriteManager::frameDeltaTime);
-				sprite->Draw();
-			}
-		}
-
-		static void RegisterSprite(Sprite* spriteToRegister)
-		{
-			SpriteManager::sprites.push_back(spriteToRegister);
-		}
-
-		static void UnRegisterSprite(Sprite* spriteToUnRegister)
-		{
-			std::erase(SpriteManager::sprites, spriteToUnRegister);
-			delete spriteToUnRegister;
-		}
-
-		static Sprite* CreateSprite(SpriteSheet* spriteSheet)
-		{
-			Sprite* newSprite = new Sprite(spriteSheet);
-			SpriteManager::RegisterSprite(newSprite);
-			return newSprite;
-		}
-
-		static void UnregisterAll()
-		{
-			for (Sprite* sprite : SpriteManager::sprites)
-				delete sprite;
-			sprites.clear();
-		}
-
-	private:
-		inline static std::vector<Sprite*> sprites;
-	};
-}
+//namespace NARay
+//{
+//	export class SpriteManager
+//	{
+//	public:
+//		inline static float frameDeltaTime = 0.0f;
+//
+//		static void DrawSprites(float frameDeltaTime)
+//		{
+//			SpriteManager::frameDeltaTime = frameDeltaTime;
+//			for (Sprite* sprite : SpriteManager::sprites)
+//			{
+//				sprite->UpdateTimers(SpriteManager::frameDeltaTime);
+//				sprite->Draw();
+//			}
+//		}
+//
+//		static void RegisterSprite(Sprite* spriteToRegister)
+//		{
+//			SpriteManager::sprites.push_back(spriteToRegister);
+//		}
+//
+//		static void UnRegisterSprite(Sprite* spriteToUnRegister)
+//		{
+//			std::erase(SpriteManager::sprites, spriteToUnRegister);
+//			delete spriteToUnRegister;
+//		}
+//
+//		static Sprite* CreateSprite(SpriteSheet* spriteSheet)
+//		{
+//			Sprite* newSprite = new Sprite(spriteSheet);
+//			SpriteManager::RegisterSprite(newSprite);
+//			return newSprite;
+//		}
+//
+//		static void UnregisterAll()
+//		{
+//			for (Sprite* sprite : SpriteManager::sprites)
+//				delete sprite;
+//			sprites.clear();
+//		}
+//
+//	private:
+//		inline static std::vector<Sprite*> sprites;
+//	};
+//}
