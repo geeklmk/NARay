@@ -65,13 +65,16 @@ int main(void)
     sprite_1.SetAnim(0).SetScale(4);
     
     sprite_2.SetAnim(0).SetScale(3);
-    sprite_1.SetOrder(3);
+
+    int order = 3;
+
+    sprite_1.SetOrder(order);
     sprite_2.SetOrder(2);
 
     Texture2D panel = LoadTexture("resources/nineslice.png");
     NineSlice slice(panel, 48, 48, 48, 48);
     NSPanel uiPanel(slice);
-    uiPanel.SetPosition(16, 400);
+    uiPanel.SetPosition(16, 16);
     uiPanel.SetSize(screenWidth - 32, 164);
 
 
@@ -81,18 +84,38 @@ int main(void)
     float ang = 0;
 
     int jump;
-    auto tween = tweeny::from(0)
-        .to(200).via(tweeny::easing::cubicInOut).during(1000)
-        .to(0).via(tweeny::easing::cubicInOut).during(1000);
 
+    auto tween = tweeny::from(0)
+        .to(200).via(tweeny::easing::cubicInOut).during(1000)        
+        .to(0).via(tweeny::easing::cubicInOut).during(1000);
+    bool up= true;
     while (!WindowShouldClose())    // Detect window close button or ESC key
     {
         float delta = GetFrameTime();
         int deltaMillis = (int)(delta * 1000);
 
         jump = tween.step(delta);
-        if (tween.progress() >= 1)
+
+        if (tween.progress() >= 0.5f && up)
+        {
+                order = order == 3 ? 1 : 3;
+                up = false;
+                sprite_1.SetOrder(order);            
+        }
+
+        if (tween.progress() >= 1.0f)
+        {
             tween.seek(0);
+            up = true;
+        }
+
+
+        //sprite_1->SetRotation(ang);
+        //ang += 1;
+        sprite_1.SetPosition(200, 729-jump);
+        sprite_2.SetPosition(250, 729);
+
+        BeginDrawing();
 
         DrawTexture(bgLayer11, 0, 0, WHITE);
         DrawTexture(bgLayer10, 0, 0, WHITE);
@@ -106,20 +129,10 @@ int main(void)
         DrawTexture(bgLayer02, 0, 0, WHITE);
         DrawTexture(bgLayer01, 0, 0, WHITE);
         DrawTexture(bgLayer00, 0, 0, WHITE);
-
-
-        //sprite_1->SetRotation(ang);
-        //ang += 1;
-        sprite_1.SetPosition(200, 729-jump);
-        sprite_2.SetPosition(250, 729);
-
-        BeginDrawing();
   
         ClearBackground(RAYWHITE);
 
         GfxPipeline::Draw(delta);
-
-        DrawLine(0, 400, 600, 400, BLACK);
 
         EndDrawing();
     }

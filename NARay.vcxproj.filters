@@ -48,9 +48,6 @@
     <ClCompile Include="libs\NARay\SpriteAnimator\SpriteAnimator.Sprite.ixx">
       <Filter>Source Files\Libs\NARay\SpriteAnimator</Filter>
     </ClCompile>
-    <ClCompile Include="libs\NARay\SpriteAnimator\SpriteAnimator.SpriteManager.ixx">
-      <Filter>Source Files\Libs\NARay\SpriteAnimator</Filter>
-    </ClCompile>
     <ClCompile Include="libs\NARay\SpriteAnimator\SpriteAnimator.SpriteSheet.ixx">
       <Filter>Source Files\Libs\NARay\SpriteAnimator</Filter>
     </ClCompile>

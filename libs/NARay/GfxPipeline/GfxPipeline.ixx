@@ -9,6 +9,7 @@
  * License: LGPL 2.1
  *
  */
+#include<iostream>
 #include <vector>
 #include<map>
 #include<unordered_map>
@@ -55,7 +56,7 @@ namespace NARay
 		static void Draw(float deltaTime, int drawStart=MIN_LAYER, int drawEnd=MAX_LAYER)
 		{
 			auto it = layers.lower_bound(drawStart);
-
+			int i = 0;
 			while (it != layers.end() && it->first < drawEnd)
 			{
 				int currentLayer = it->first;
@@ -64,6 +65,7 @@ namespace NARay
 				{
 					drawable->UpdateTimers(GfxPipeline::frameDeltaTime);
 					drawable->Draw();
+					++i;
 				}
 				++it;
 			}
@@ -78,9 +80,9 @@ namespace NARay
 		static void MoveDrawable(Drawable* drawableToMove)
 		{
 			// check if it exists
-			if (drawableTracker.find(drawableToMove) == drawableTracker.end())
+			if (GfxPipeline::drawableTracker.find(drawableToMove) == GfxPipeline::drawableTracker.end())
 			{
-				RegisterDrawable(drawableToMove);
+				GfxPipeline::RegisterDrawable(drawableToMove);
 				return;
 			}
 			int newLayer = drawableToMove->GetOrder();
@@ -90,16 +92,16 @@ namespace NARay
 			if (newLayer == oldLayer)
 				return;
 
-			UnRegisterDrawable(drawableToMove);
-			RegisterDrawable(drawableToMove);
+			GfxPipeline::UnRegisterDrawable(drawableToMove);
+			GfxPipeline::RegisterDrawable(drawableToMove);
 		}
 
 		static void UnRegisterDrawable(Drawable* drawableToUnRegister)
 		{
 			// check if it exists
-			if (drawableTracker.find(drawableToUnRegister) == drawableTracker.end())
+			if (GfxPipeline::drawableTracker.find(drawableToUnRegister) == GfxPipeline::drawableTracker.end())
 				return;
-			std::vector<Drawable*>& oldLayerVector = GfxPipeline::layers[drawableToUnRegister->GetOrder()];
+			std::vector<Drawable*>& oldLayerVector = GfxPipeline::layers[GfxPipeline::drawableTracker[drawableToUnRegister]];
 			std::erase(oldLayerVector, drawableToUnRegister);
 		}
 
