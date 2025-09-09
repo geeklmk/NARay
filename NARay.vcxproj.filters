@@ -60,6 +60,12 @@
     <ClCompile Include="libs\NARay\GfxPipeline\GfxPipeline.ixx">
       <Filter>Source Files\Libs\NARay\GfxPipeline</Filter>
     </ClCompile>
+    <ClCompile Include="libs\NARay\SGui\SGui.NSPanel.ixx">
+      <Filter>Source Files\Libs\NARay\SGui</Filter>
+    </ClCompile>
+    <ClCompile Include="libs\NARay\SGui\SGui.Text.ixx">
+      <Filter>Source Files\Libs\NARay\SGui</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <Image Include="resources\ninja.png">

@@ -77,7 +77,13 @@ int main(void)
     uiPanel.SetPosition(16, 16);
     uiPanel.SetSize(screenWidth - 32, 164);
 
+    Text uiText(GetFontDefault(), 32, BLACK);
+    uiText
+        .SetPosition( 16, 16 )
+        .SetSize(screenWidth - 32, 164)
+        .SetAlign(NARay::MIDDLE, NARay::CENTER);
 
+    uiText.SetText("Prova medio lunga ma non troppo");
 
     float timer = 0;
     int frame = 0;

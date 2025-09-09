@@ -129,6 +129,8 @@
   <ItemGroup>
     <ClCompile Include="libs\NARay\GfxPipeline\GfxPipeline.ixx" />
     <ClCompile Include="libs\NARay\SGui\SGui.ixx" />
+    <ClCompile Include="libs\NARay\SGui\SGui.NSPanel.ixx" />
+    <ClCompile Include="libs\NARay\SGui\SGui.Text.ixx" />
     <ClCompile Include="libs\NARay\SpriteAnimator\SpriteAnimator.GridSpriteSheet.ixx" />
     <ClCompile Include="libs\NARay\SpriteAnimator\SpriteAnimator.ixx" />
     <ClCompile Include="libs\NARay\SpriteAnimator\SpriteAnimator.Sprite.ixx" />
