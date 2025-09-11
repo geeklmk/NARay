@@ -128,6 +128,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="libs\NARay\GfxPipeline\GfxPipeline.ixx" />
+    <ClCompile Include="libs\NARay\SGui\SGui.GuiElement.ixx" />
     <ClCompile Include="libs\NARay\SGui\SGui.ixx" />
     <ClCompile Include="libs\NARay\SGui\SGui.NSPanel.ixx" />
     <ClCompile Include="libs\NARay\SGui\SGui.Text.ixx" />

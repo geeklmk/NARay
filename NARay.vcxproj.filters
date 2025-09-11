@@ -66,6 +66,9 @@
     <ClCompile Include="libs\NARay\SGui\SGui.Text.ixx">
       <Filter>Source Files\Libs\NARay\SGui</Filter>
     </ClCompile>
+    <ClCompile Include="libs\NARay\SGui\SGui.GuiElement.ixx">
+      <Filter>Source Files\Libs\NARay\SGui</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <Image Include="resources\ninja.png">
